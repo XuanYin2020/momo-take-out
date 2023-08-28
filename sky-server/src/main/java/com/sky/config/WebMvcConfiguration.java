@@ -41,16 +41,19 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
      * 通过knife4j生成接口文档
      * @return
      */
-    @Bean
+    @Bean//由Spring框架创建对象、管理对象
     public Docket docket() {
+        //构建生成接口文档的信息
         ApiInfo apiInfo = new ApiInfoBuilder()
-                .title("苍穹外卖项目接口文档")
+                .title("momo take-out项目接口文档")
                 .version("2.0")
-                .description("苍穹外卖项目接口文档")
+                .description("momo take-out接口文档")
                 .build();
+
         Docket docket = new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo)
                 .select()
+                //指定生成接口需要扫描的包（把类和类里面的方法，通过反射解析，得到接口文档）
                 .apis(RequestHandlerSelectors.basePackage("com.sky.controller"))
                 .paths(PathSelectors.any())
                 .build();
@@ -62,6 +65,7 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
      * @param registry
      */
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
+        //生成接口文档，放置在固定路径下
         registry.addResourceHandler("/doc.html").addResourceLocations("classpath:/META-INF/resources/");
         registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
