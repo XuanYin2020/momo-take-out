@@ -41,24 +41,27 @@ public class EmployeeController {
     public Result<EmployeeLoginVO> login(@RequestBody EmployeeLoginDTO employeeLoginDTO) {
         log.info("员工登录：{}", employeeLoginDTO);
 
+        //1. 调用server中的login方法，debug模式下ctral+alt+B进入实现的Impl
         Employee employee = employeeService.login(employeeLoginDTO);
 
-        //登录成功后，生成jwt令牌
+        //2. 登录成功后，生成jwt令牌
         Map<String, Object> claims = new HashMap<>();
         claims.put(JwtClaimsConstant.EMP_ID, employee.getId());
+        //2.1 生成token
         String token = JwtUtil.createJWT(
                 jwtProperties.getAdminSecretKey(),
-                jwtProperties.getAdminTtl(),
+                jwtProperties.getAdminTtl(), //令牌过期时间
                 claims);
 
-        EmployeeLoginVO employeeLoginVO = EmployeeLoginVO.builder()
+        //3. 后端封装相应给前端页面
+        EmployeeLoginVO employeeLoginVO = EmployeeLoginVO.builder()//VO对象上加上Builder注解，使用builder()构建器的方式去封装
                 .id(employee.getId())
                 .userName(employee.getUsername())
                 .name(employee.getName())
                 .token(token)
-                .build();
+                .build();//build()构建好
 
-        return Result.success(employeeLoginVO);
+        return Result.success(employeeLoginVO); //Result.success（）将后端的结果封装在success对象里面
     }
 
     /**
