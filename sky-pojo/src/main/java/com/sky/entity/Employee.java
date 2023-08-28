@@ -1,5 +1,7 @@
 package com.sky.entity;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,6 +14,7 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@ApiModel(description = "Employee entity")
 public class Employee implements Serializable {
 
     private static final long serialVersionUID = 1L;
