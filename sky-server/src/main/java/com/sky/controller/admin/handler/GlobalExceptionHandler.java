@@ -1,4 +1,4 @@
-package com.sky.handler;
+package com.sky.controller.admin.handler;
 
 import com.sky.exception.BaseException;
 import com.sky.result.Result;
