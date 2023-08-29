@@ -4,6 +4,10 @@ import lombok.Data;
 
 import java.io.Serializable;
 
+/*
+* 新增员工
+*/
+
 @Data
 public class EmployeeDTO implements Serializable {
 
