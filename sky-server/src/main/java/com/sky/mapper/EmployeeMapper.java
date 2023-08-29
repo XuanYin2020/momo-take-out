@@ -1,5 +1,7 @@
 package com.sky.mapper;
 
+import com.github.pagehelper.Page;
+import com.sky.dto.EmployeePageQueryDTO;
 import com.sky.entity.Employee;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -29,4 +31,9 @@ public interface EmployeeMapper {
             "#{createTime},#{updateTime},#{createUser},#{updateUser}) ") //单表的插入操作,注意顺序
     void insert(Employee employee);
 
+    /**
+     * 分页查询 ，在映射文件中实现
+     * @param employeePageQueryDTO
+     */
+    Page<Employee> pageQuery(EmployeePageQueryDTO employeePageQueryDTO);
 }
