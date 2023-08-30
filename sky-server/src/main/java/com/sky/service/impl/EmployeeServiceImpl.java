@@ -99,6 +99,11 @@ public class EmployeeServiceImpl implements EmployeeService {
         return null;
     }
 
+    /**
+     * 分页请求员工数据
+     * @param employeePageQueryDTO
+     * @return
+     */
     @Override
     public PageResult pageQuery(EmployeePageQueryDTO employeePageQueryDTO) {
 
@@ -117,6 +122,29 @@ public class EmployeeServiceImpl implements EmployeeService {
         List<Employee> records = pages.getResult();
 
         return new PageResult(total,records);
+    }
+
+    /**
+     * 更改员工的状态
+     * 根据员工的id，修改数据库的状态
+     * @param status
+     * @param id
+     */
+    @Override
+    public void changeStatus(Integer status, Long id) {
+//        //方法一：传统方法
+//        Employee employee = new Employee();
+//        employee.setStatus(status);
+//        employee.setId(id);
+
+        //方法二：使用builder构建器
+        Employee employee  = new Employee().builder()
+                .id(id)
+                .status(status)
+                .build();
+
+        //调用修改 期望发送：update employee set status = ? where id = ?
+        employeeMapper.update(employee); //update的通用性
     }
 
 

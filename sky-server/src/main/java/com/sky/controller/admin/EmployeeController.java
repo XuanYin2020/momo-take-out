@@ -109,4 +109,18 @@ public class EmployeeController {
 
         return Result.success(pageResult);
     }
+
+    /**
+     * 修改员工状态
+     *
+     * @return
+     */
+    @PostMapping("status/{status}") //路径参数
+    @ApiOperation(value = "Change Employee Status")
+    public Result changeStatus(@PathVariable Integer status,Long id){ //查询类的将泛型<>加上，其他可以不加
+        log.info("修改员工{}的状态为{}",id,status);
+        employeeService.changeStatus(status,id);
+
+        return Result.success();
+    }
 }

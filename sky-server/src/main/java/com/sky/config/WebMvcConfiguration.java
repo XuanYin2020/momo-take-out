@@ -89,5 +89,9 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
         converter.setObjectMapper(new JacksonObjectMapper());//将我们自己的转换器放入spring MVC框架的容器中
         converters.add(0,converter);
     }
+
+
+
+
 }
 
